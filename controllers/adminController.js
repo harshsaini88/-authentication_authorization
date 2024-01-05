@@ -31,7 +31,7 @@ const createAdmin = async (req, res) => {
     await admin.save();
 
     // Return success message
-    return res.status(201).json({ message: 'Admin created successfully' });
+    return res.redirect("/login");
   } catch (error) {
     // Handle errors and log them
     console.error(error);
