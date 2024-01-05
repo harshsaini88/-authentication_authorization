@@ -5,6 +5,7 @@ const userRoutes = require('./routes/userRoutes');
 const config = require('./config/config');
 const adminRoutes = require('./routes/adminRoutes')
 const cookieParser = require('cookie-parser')
+const path = require('path')
 // const axios = require('axios');
 // const cors = require('cors')
 
@@ -21,7 +22,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 // app.use(express.static(__dirname+'/IS_ASSIGNMENT/'))
 app.use('/uploads', express.static('uploads'));
-app.set('views', 'G:\\IS_assignment\\views');
+app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Sample user data (replace this with your database logic)
