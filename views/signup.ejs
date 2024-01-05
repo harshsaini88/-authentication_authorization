@@ -1,0 +1,137 @@
+<!-- HTML document for signup page -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags for character set and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <!-- Internal CSS styling for the page -->
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Styling for the main heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the signup form */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Styling for form labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Styling for form input fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling for radio buttons */
+        input[type="radio" i] {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* Styling for the signup button */
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Styling for button hover state */
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main heading for the signup page -->
+    <h1>Signup Page</h1>
+    <!-- Signup form with enctype for file upload -->
+    <form method="post" id="signupForm" enctype="multipart/form-data">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <br>
+        <label for="profilePhoto">Profile Photo:</label>
+        <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+
+        <br>
+        <label>Role:</label>
+        <input type="radio" id="user" name="role" value="user" checked>
+        <label for="user">User</label>
+        <input type="radio" id="admin" name="role" value="admin">
+        <label for="admin">Admin</label>
+        <br>
+        <!-- Button to trigger the submitForm function -->
+        <button type="button" onclick="submitForm()">Signup</button>
+    </form>
+
+    <!-- JavaScript section for handling form submission -->
+    <script>
+        // Function to handle form submission
+        function submitForm() {
+            const form = document.getElementById('signupForm');
+            const selectedRole = document.querySelector('input[name="role"]:checked');
+
+            if (selectedRole && selectedRole.value === 'admin') {
+                form.action = 'http://localhost:3000/api/admin/create';
+                // Remove the 'role' field from the form data
+                const roleField = document.getElementById('admin');
+                roleField.parentNode.removeChild(roleField);
+            } else {
+                form.action = 'http://localhost:3000/api/user/signup';
+                // Remove the 'role' field from the form data
+                const roleField = document.getElementById('user');
+                roleField.parentNode.removeChild(roleField);
+            }
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

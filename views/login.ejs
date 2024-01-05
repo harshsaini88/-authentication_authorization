@@ -1,0 +1,89 @@
+<!-- views/login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for character set and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Internal CSS styling for the page -->
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Styling for the main heading */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 10%;
+        }
+
+        /* Styling for the login form */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Styling for form labels */
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Styling for form input fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling for the submit button */
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Styling for button hover state */
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main heading for the login page -->
+    <h1>Login Page</h1>
+
+    <!-- Login form with method and action attributes -->
+    <form method="post" action="http://localhost:3000/api/user/login">
+        <label for="emailOrPhone">Email or Phone:</label>
+        <input type="text" id="emailOrPhone" name="emailOrPhone" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            /* display: flex; */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            margin-top: 10%;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            /* Adjust the width as needed */
+            text-align: left;
+            /* margin-left: 26rem; */
+            /* align-self: center; */
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        p{
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update User</h1>
+
+    <p>!!Please click the Back-Button to check details are updated or not!!!</p>
+    
+    <form id="updateForm" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="profileImage">Profile Image:</label>
+        <input type="file" id="profileImage" name="profileImage" accept="image/*" required>
+        
+        <button type="button" onclick="updateUser()">Update</button>
+    </form>
+    
+    <script>
+        // Retrieve userID from local storage
+        var userId = localStorage.getItem('userId');
+    
+        // Function to update user
+        function updateUser() {
+            var name = document.getElementById('name').value;
+            var profileImage = document.getElementById('profileImage').files[0];
+    
+            // Perform validation: Check if the name field is filled
+            if (!name) {
+                alert('Please fill in the name field.');
+                return;
+            }
+    
+            // Create a FormData object to send the data
+            var formData = new FormData();
+            formData.append('name', name);
+            formData.append('profileImage', profileImage);
+    
+            // Make an asynchronous PUT request
+            fetch(`http://localhost:3000/api/user/modify/${userId}`, {
+                method: 'PUT',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response, e.g., show a success message
+                console.log(data);
+    
+                // Redirect to the home screen after a successful update
+                window.location.href = 'http://localhost:3000/home'; // Adjust the route accordingly
+            })
+            .catch(error => {
+                // Handle errors, e.g., show an error message
+                console.error('Error:', error);
+            });
+        }
+    
+        // You can use JavaScript to pre-fill the name input field if needed
+        // For example, if you have the user's current name stored in local storage
+        document.getElementById('name').value = localStorage.getItem('currentUserName');
+    </script>
+</body>
+</html>
