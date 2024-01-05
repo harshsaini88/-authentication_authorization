@@ -36,6 +36,8 @@ Welcome to the Node.js Authentication and Authorization project! This applicatio
 
 8. [Data Validation](#data-validation)
 
+9. [File Structure](#file-structure)
+
 ## Getting Started
 
 ### Prerequisites
