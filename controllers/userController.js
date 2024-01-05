@@ -129,6 +129,8 @@ const modifyUserDetails = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: 'User not found' });
     }
+
+    return res.redirect("/login");
     
 
   } catch (error) {
